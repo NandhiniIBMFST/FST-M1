@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:testCase id="ebce6277-4d6a-40c2-8230-eb8d72b12f23" discardOkResults="false" failOnError="true" failTestCaseOnErrors="true" keepSession="false" name="Test Case" searchProperties="true" timeout="0" xmlns:con="http://eviware.com/soapui/config">
+      <con:settings/>
+      <con:testStep type="restrequest" name="GET Request" id="3a25cf99-e5c5-422a-8aa0-c4a033908510">
+        <con:settings/>
+        <con:config service="https://api.github.com" resourcePath="/user/emails" methodName="Emails" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+          <con:restRequest name="GET Request" id="fe5013bc-e00f-4be0-837d-1b7809408c8b" mediaType="application/json">
+            <con:settings>
+              <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
+            </con:settings>
+            <con:endpoint>https://api.github.com</con:endpoint>
+            <con:request/>
+            <con:originalUri>https://api.github.com/user/emails</con:originalUri>
+            <con:assertion type="Valid HTTP Status Codes" id="b6a4f2a7-8d86-4973-bd75-3ec58eb4f63f" name="Valid HTTP Status Codes">
+              <con:settings/>
+              <con:configuration><codes>200</codes></con:configuration>
+            </con:assertion>
+            <con:credentials>
+              <con:selectedAuthProfile>github</con:selectedAuthProfile>
+              <con:authType>No Authorization</con:authType>
+            </con:credentials>
+            <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+            <con:parameters/>
+          </con:restRequest>
+        </con:config>
+      </con:testStep>
+      <con:testStep type="restrequest" name="POST Request" id="b9570f83-389f-4b56-a6bc-83b675ce96db">
+        <con:settings/>
+        <con:config service="https://api.github.com" resourcePath="/user/keys" methodName="Method 1" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+          <con:restRequest name="POST Request" id="f9fb8053-9b52-468f-b198-2d6e1f9e857a" mediaType="application/json" postQueryString="false">
+            <con:settings>
+              <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
+            </con:settings>
+            <con:endpoint>https://api.github.com</con:endpoint>
+            <con:request>{
+	"title":"Test Key",
+	"key":"ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDA5qyXDdqhFguLFWxPzLOp6O/3vhPxafRS5lxWmKRDctxSULkH5gJq39ArYfAuOFqEuL11xZQ+HURhEiGw0UFF2HDvMkPD9oPysgSFzOfZHzH5j/lPBj/ArZboTFf6Qny235nh+2A9ky4WDDSlXnjy2KdMZnkVBagFfmAVU2957//eHer1NFOtubT6Rq2gH/JUOLSd7uxkCTVTVq40ZWLYmjTuEb+rYJM6SUJtLuWvcGs+sVxqoOk0n8gVD5TwbBoPEIuxPI+lKgl7iZ0x+AzUu6C0IUQoWeiDTCgPoDXqo5yrhdOCmeQy/Vnty1Kn5GgzAo2ahfXHnyKoYKznnCIEo9ws8ylLmfZFYrkneQ4NNBsZBnUcZpUMjpEtguapcbrZFVABrSKNT7Py2OxeFKJJyvsDUx/TRRX/6Ig/JyFL5dXTQPd0rsGf94dPlmpkgAm5Ov7i9a4Sxvs580K5f610D/TwnHRk0vKea+xV2C+2kfX4hMIfwzAZurZwPv3zyjk="
+}</con:request>
+            <con:originalUri>https://api.github.com/user/keys</con:originalUri>
+            
+            
+            <con:assertion type="Valid HTTP Status Codes" id="7cb026f5-69e2-43fd-8db3-1539528eaa7c" name="Valid HTTP Status Codes"><con:settings/><con:configuration><codes>201</codes></con:configuration></con:assertion><con:credentials>
+              <con:selectedAuthProfile>github</con:selectedAuthProfile>
+              <con:authType>No Authorization</con:authType>
+            </con:credentials>
+            <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+            <con:parameters/>
+          </con:restRequest>
+        </con:config>
+      </con:testStep>
+      <con:testStep type="transfer" name="PropertyTransfer 1" id="7614f0c6-9002-44b9-a931-82db961a5305"><con:settings/><con:config xsi:type="con:PropertyTransfersStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:transfers setNullOnMissingSource="true" transferTextContent="true" failOnError="true" ignoreEmpty="false" transferToAll="false" entitize="false" transferChildNodes="false"><con:name>id</con:name><con:sourceType>Response</con:sourceType><con:sourceStep>POST Request</con:sourceStep><con:sourcePath>$['id']</con:sourcePath><con:targetType>keyID</con:targetType><con:targetStep>REST Request</con:targetStep><con:targetPath/><con:type>JSONPATH</con:type><con:upgraded>true</con:upgraded></con:transfers></con:config></con:testStep>
+      <con:testStep type="restrequest" name="REST Request" id="26e7da65-113a-448c-855a-c23230cb31e6"><con:settings/><con:config service="https://api.github.com" resourcePath="/user/keys/{keyID}" methodName="Method 1" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:restRequest name="REST Request" id="063aae85-a647-4df6-b0e0-3d312f02d5cd" mediaType="application/json" postQueryString="false">
+          <con:settings>
+            <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
+          </con:settings>
+          <con:endpoint>https://api.github.com</con:endpoint>
+          <con:request/>
+          <con:originalUri>https://api.github.com/user/keys/0</con:originalUri>
+          <con:assertion type="Valid HTTP Status Codes" id="8191275d-0427-4572-8748-99ea1f09a7b4" name="Valid HTTP Status Codes"><con:settings/><con:configuration><codes>204</codes></con:configuration></con:assertion><con:credentials>
+            <con:selectedAuthProfile>github</con:selectedAuthProfile>
+            <con:authType>No Authorization</con:authType>
+          </con:credentials>
+          <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+          <con:parameters><con:entry key="keyID" value="59994816"/></con:parameters>
+          <con:parameterOrder>
+            <con:entry>keyID</con:entry>
+          </con:parameterOrder>
+        </con:restRequest></con:config></con:testStep><con:properties/>
+      <con:reportParameters/>
+    </con:testCase>
